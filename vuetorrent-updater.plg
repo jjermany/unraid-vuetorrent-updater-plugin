@@ -1,53 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<plugin name="VueTorrent Updater" author="Jalon Jermany" version="2025.06.18.3">
+<plugin name="VueTorrent Updater" author="Jalon Jermany" version="2025.06.18.4">
   <description>Automates updating the VueTorrent WebUI for qBittorrent on Unraid.</description>
   <category>Docker</category>
   <language>en</language>
-
-  <changes>
-    <h3>2025.06.18</h3>
-    <ul>
-      <li>Initial plugin framework with core update script.</li>
-    </ul>
-  </changes>
-
-  <urls>
-    <support>https://github.com/jjermany/unraid-vuetorrent-updater-plugin/issues</support>
-    <repo>https://github.com/jjermany/unraid-vuetorrent-updater-plugin</repo>
-  </urls>
 
   <paths>
     <path>/usr/local/emhttp/plugins/vuetorrent-updater</path>
   </paths>
 
-  <!-- Copy settings.php -->
   <file>
     <copy src="/mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/template/settings.php"
           dst="/usr/local/emhttp/plugins/vuetorrent-updater/template/settings.php"
           mode="0644" />
   </file>
 
-  <!-- Copy update script -->
-  <file>
-    <copy src="/mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/scripts/update_vuetorrent.sh"
-          dst="/usr/local/emhttp/plugins/vuetorrent-updater/scripts/update_vuetorrent.sh"
-          mode="0755" />
-  </file>
-
   <install>
-    <cmd>logger "VueTorrent Updater: Plugin installed successfully."</cmd>
+    <cmd>logger "VueTorrent Updater installed"</cmd>
   </install>
 
   <remove>
-    <cmd>logger "VueTorrent Updater: Uninstalling and backing up user data."</cmd>
-    <cmd>mkdir -p /boot/config/plugins/vuetorrent-updater-backup</cmd>
-    <cmd>cp -r /usr/local/emhttp/plugins/vuetorrent-updater/* /boot/config/plugins/vuetorrent-updater-backup/ 2>/dev/null || true</cmd>
     <cmd>rm -rf /usr/local/emhttp/plugins/vuetorrent-updater</cmd>
   </remove>
-
-  <array_start>
-    <cmd>logger "VueTorrent Updater: Array started."</cmd>
-  </array_start>
 
   <webui>/plugins/vuetorrent-updater/template/settings.php</webui>
 
@@ -58,9 +31,4 @@
     <menu>yes</menu>
     <tab>settings</tab>
   </page>
-
-  <help>
-    <name>vuetorrent-updater</name>
-    <url>https://github.com/jjermany/unraid-vuetorrent-updater-plugin</url>
-  </help>
 </plugin>
