@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PLUGIN Name="VueTorrent Updater" Author="Jalon Jermany" Version="2025.06.19.2" PluginURL="https://raw.githubusercontent.com/jjermany/unraid-vuetorrent-updater-plugin/main/vuetorrent-updater.plg">
+<PLUGIN Name="VueTorrent Updater" Author="Jalon Jermany" Version="2025.06.19.5" PluginURL="https://raw.githubusercontent.com/jjermany/unraid-vuetorrent-updater-plugin/main/vuetorrent-updater.plg">
   <Description>Automates updating the VueTorrent WebUI for qBittorrent on Unraid.</Description>
   <Category>Docker</Category>
   <Language>en</Language>
 
   <Changes>
+    <![CDATA[
     <h3>2025.06.18</h3>
     <ul>
       <li>Initial plugin framework with core update script.</li>
@@ -21,17 +22,29 @@
     <ul>
       <li>Reverted to explicit 'cp' commands in Install block for reliable file copying.</li>
     </ul>
+    <h3>2025.06.19.3</h3>
+    <ul>
+      <li>Removed invisible leading characters (e.g., non-breaking spaces) from XML for parsing.</li>
+    </ul>
+    <h3>2025.06.19.4</h3>
+    <ul>
+      <li>Ensured absolute cleanliness of XML file to prevent hidden character parsing issues.</li>
+    </ul>
+    <h3>2025.06.19.5</h3>
+    <ul>
+      <li>Corrected shell redirection operators ('>', '>>', '&') within Cmd tags.</li>
+    </ul>
+    ]]>
   </Changes>
 
   <Install>
     <Cmd>logger "VueTorrent Updater: Starting plugin installation."</Cmd>
     <Cmd>mkdir -p /usr/local/emhttp/plugins/vuetorrent-updater/template</Cmd>
     <Cmd>mkdir -p /usr/local/emhttp/plugins/vuetorrent-updater/scripts</Cmd>
-    <Cmd>cp -a "/mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/rootfs/template/" "/usr/local/emhttp/plugins/vuetorrent-updater/" 2>>/boot/config/plugins/plugin_debug.log || true</Cmd>
-    <Cmd>cp -a "/mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/rootfs/scripts/" "/usr/local/emhttp/plugins/vuetorrent-updater/" 2>>/boot/config/plugins/plugin_debug.log || true</Cmd>
-    <Cmd>cp "/mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/vuetorrent-updater.plg" "/usr/local/emhttp/plugins/vuetorrent-updater/" 2>>/boot/config/plugins/plugin_debug.log || true</Cmd>
+    <Cmd>cp -a "/mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/rootfs/template/" "/usr/local/emhttp/plugins/vuetorrent-updater" 2>>/boot/config/plugins/plugin_debug.log || true</Cmd>
+    <Cmd>cp -a "/mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/rootfs/scripts/" "/usr/local/emhttp/plugins/vuetorrent-updater" 2>>/boot/config/plugins/plugin_debug.log || true</Cmd>
     <Cmd>chmod 0755 /usr/local/emhttp/plugins/vuetorrent-updater/vuetorrent-updater.plg 2>>/boot/config/plugins/plugin_debug.log || true</Cmd>
-    <Cmd>chmod 0644 /usr/local/emhttp/plugins/vuetorrent-updater/template/settings.php 2>>/boot/config/plugins/plugin_debug.log || true</Cmd>
+    <Cmd>chmod 0644 /usr/local/emhttp/plugins/vuetorrent-updater/vuetorrent-updater.plg 2>>/boot/config/plugins/plugin_debug.log || true</Cmd>
     <Cmd>chmod 0755 /usr/local/emhttp/plugins/vuetorrent-updater/scripts/update_vuetorrent.sh 2>>/boot/config/plugins/plugin_debug.log || true</Cmd>
 
     <Cmd>echo "--- Directory contents after installation ---" >> /boot/config/plugins/plugin_debug.log</Cmd>
@@ -42,15 +55,16 @@
   <Remove>
     <Cmd>logger "VueTorrent Updater: Plugin uninstalled. Backing up user data."</Cmd>
     <Cmd>mkdir -p /boot/config/plugins/vuetorrent-updater-backup</Cmd>
-    <Cmd>cp -r /usr/local/emhttp/plugins/vuetorrent-updater/* /boot/config/plugins/vuetorrent-updater-backup/ 2>/dev/null || true</Cmd>
-    <Cmd>rm -rf /usr/local/emhttp/plugins/vuetorrent-updater</Cmd>
+    <Cmd>rsync -a --exclude='*.plg' /usr/local/emhttp/plugins/vuetorrent-updater/ /boot/config/plugins/vuetorrent-updater-backup/ 2>>/dev/null || true</Cmd>
+    <Cmd>rm -rf /usr/local/emhttp/plugins/vuetorrent-updater 2>>/boot/config/plugins/plugin_debug.log || true</Cmd>
   </Remove>
 
   <Array_Start>
     <Cmd>logger "VueTorrent Updater: Array started."</Cmd>
   </Array_Start>
 
-  <WebUI>/plugins/vuetorrent-updater/template/settings.php</WebUI>
+  <Variable name="PLG_BASE_DIR">/usr/local/emhttp/plugins/vuetorrent-updater</Variable>
+  <WebUI>$PLG_BASE_DIR/template/settings.php</WebUI>
 
   <Page>
     <Name>vuetorrent-updater</Name>
