@@ -43,15 +43,19 @@
     <cmd>logger "VueTorrent Updater: Array started."</cmd>
   </array_start>
 
-  <webui>
-    <url>http://[IP]:[PORT:8080]/Settings/vuetorrent-updater</url>
-  </webui>
+<webui>/plugins/vuetorrent-updater/template/settings.php</webui>
 
-  <page>
-    <name>vuetorrent-updater</name>
-    <title>VueTorrent Updater</title>
-    <url>/Settings/vuetorrent-updater</url>
-    <menu>yes</menu>
-    <tab>settings</tab>
-  </page>
+<page>
+  <name>vuetorrent-updater</name>
+  <title>VueTorrent Updater</title>
+  <url>/plugins/vuetorrent-updater/template/settings.php</url>
+  <menu>yes</menu>
+  <tab>settings</tab>
+</page>
+
+<help>
+  <name>vuetorrent-updater</name>
+  <url>https://github.com/jjermany/unraid-vuetorrent-updater-plugin</url>
+</help>
+
 </plugin>
