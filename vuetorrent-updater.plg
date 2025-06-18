@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin>
+  <name>VueTorrent Updater</name>
+  <version>2025.06.18</version> <author>Jalon Jermany</author>
+  <description>Automates updating the VueTorrent WebUI for qBittorrent on Unraid.</description>
+  <category>Docker</category>
+  <language>en</language>
+  <changes>
+    <h3>2025.06.18</h3>
+    <ul>
+      <li>Initial plugin framework with core update script.</li>
+    </ul>
+  </changes>
+  <urls>
+    <support>https://github.com/jjermany/unraid-vuetorrent-updater-plugin/issues</support>
+    <repo>https://github.com/jjermany/unraid-vuetorrent-updater-plugin</repo>
+  </urls>
+
+  <paths>
+    <path>/usr/local/emhttp/plugins/vuetorrent-updater</path>
+  </paths>
+
+  <copy src="/mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/vuetorrent-updater.plg"            dst="/usr/local/emhttp/plugins/vuetorrent-updater/vuetorrent-updater.plg"         mode="0755"/>
+  <copy src="/mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/template/settings.php"          dst="/usr/local/emhttp/plugins/vuetorrent-updater/template/settings.php"        mode="0644"/>
+  <copy src="/mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/scripts/update_vuetorrent.sh" dst="/usr/local/emhttp/plugins/vuetorrent-updater/scripts/update_vuetorrent.sh" mode="0755"/>
+
+  <install>
+    <cmd>logger "VueTorrent Updater: Plugin installed successfully."</cmd>
+  </install>
+
+  <remove>
+    <cmd>logger "VueTorrent Updater: Plugin uninstalled."</cmd>
+    <cmd>rm -rf /usr/local/emhttp/plugins/vuetorrent-updater</cmd>
+  </remove>
+
+  <array_start>
+    <cmd>logger "VueTorrent Updater: Array started."</cmd>
+  </array_start>
+
+  <page>
+    <name>vuetorrent-updater</name>
+    <title>VueTorrent Updater</title>
+    <url>/plugins/vuetorrent-updater/template/settings.php</url>
+    <menu>yes</menu>
+    <tab>settings</tab> </page>
+</plugin>
