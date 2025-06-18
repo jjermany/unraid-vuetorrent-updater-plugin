@@ -32,10 +32,21 @@
         dst="/usr/local/emhttp/plugins/vuetorrent-updater/scripts/update_vuetorrent.sh"
         mode="0755" />
 
-  <install>
-    <cmd>logger "VueTorrent Updater: Plugin installed successfully."</cmd>
-    <cmd>ls -l /mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/template/ >> /boot/plugin_debug.log</cmd>
-  </install>
+<install>
+  <cmd>mkdir -p /usr/local/emhttp/plugins/vuetorrent-updater/template</cmd>
+  <cmd>mkdir -p /usr/local/emhttp/plugins/vuetorrent-updater/scripts</cmd>
+  <cmd>logger "VueTorrent Updater: Starting plugin installation."</cmd>
+  <cmd>cp /mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/vuetorrent-updater.plg /usr/local/emhttp/plugins/vuetorrent-updater/ 2>>/boot/config/plugins/plugin_debug.log</cmd>
+  <cmd>cp /mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/template/settings.php /usr/local/emhttp/plugins/vuetorrent-updater/template/ 2>>/boot/config/plugins/plugin_debug.log</cmd>
+  <cmd>cp /mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/scripts/update_vuetorrent.sh /usr/local/emhttp/plugins/vuetorrent-updater/scripts/ 2>>/boot/config/plugins/plugin_debug.log</cmd>
+  <cmd>chmod 0755 /usr/local/emhttp/plugins/vuetorrent-updater/vuetorrent-updater.plg 2>>/boot/config/plugins/plugin_debug.log</cmd>
+  <cmd>chmod 0644 /usr/local/emhttp/plugins/vuetorrent-updater/template/settings.php 2>>/boot/config/plugins/plugin_debug.log</cmd>
+  <cmd>chmod 0755 /usr/local/emhttp/plugins/vuetorrent-updater/scripts/update_vuetorrent.sh 2>>/boot/config/plugins/plugin_debug.log</cmd>
+  <cmd>ls -l /usr/local/emhttp/plugins/vuetorrent-updater/ >> /boot/config/plugins/plugin_debug.log</cmd>
+  <cmd>ls -l /usr/local/emhttp/plugins/vuetorrent-updater/template/ >> /boot/config/plugins/plugin_debug.log</cmd>
+  <cmd>ls -l /usr/local/emhttp/plugins/vuetorrent-updater/scripts/ >> /boot/config/plugins/plugin_debug.log</cmd>
+  <cmd>logger "VueTorrent Updater: Plugin installed successfully."</cmd>
+</install>
 
   <remove>
     <cmd>logger "VueTorrent Updater: Plugin uninstalled. Backing up user data."</cmd>
