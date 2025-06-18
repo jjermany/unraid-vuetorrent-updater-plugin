@@ -6,12 +6,14 @@
   <description>Automates updating the VueTorrent WebUI for qBittorrent on Unraid.</description>
   <category>Docker</category>
   <language>en</language>
+
   <changes>
     <h3>2025.06.18</h3>
     <ul>
       <li>Initial plugin framework with core update script.</li>
     </ul>
   </changes>
+
   <urls>
     <support>https://github.com/jjermany/unraid-vuetorrent-updater-plugin/issues</support>
     <repo>https://github.com/jjermany/unraid-vuetorrent-updater-plugin</repo>
@@ -21,8 +23,13 @@
     <path>/usr/local/emhttp/plugins/vuetorrent-updater</path>
   </paths>
 
-  <copy src="/mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/template/settings.php"          dst="/usr/local/emhttp/plugins/vuetorrent-updater/template/settings.php"        mode="0644"/>
-  <copy src="/mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/scripts/update_vuetorrent.sh" dst="/usr/local/emhttp/plugins/vuetorrent-updater/scripts/update_vuetorrent.sh" mode="0755"/>
+  <copy src="/mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/template/settings.php"
+        dst="/usr/local/emhttp/plugins/vuetorrent-updater/template/settings.php"
+        mode="0644"/>
+
+  <copy src="/mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/scripts/update_vuetorrent.sh"
+        dst="/usr/local/emhttp/plugins/vuetorrent-updater/scripts/update_vuetorrent.sh"
+        mode="0755"/>
 
   <install>
     <cmd>logger "VueTorrent Updater: Plugin installed successfully."</cmd>
@@ -33,29 +40,24 @@
     <cmd>mkdir -p /boot/config/plugins/vuetorrent-updater-backup</cmd>
     <cmd>cp -r /usr/local/emhttp/plugins/vuetorrent-updater/* /boot/config/plugins/vuetorrent-updater-backup/ 2>/dev/null || true</cmd>
     <cmd>rm -rf /usr/local/emhttp/plugins/vuetorrent-updater</cmd>
-  <!--
-    The <array_start> event is triggered when the Unraid array is started.
-    Use this section to define commands or actions that should occur at array start.
-  -->
+  </remove>
+
   <array_start>
     <cmd>logger "VueTorrent Updater: Array started."</cmd>
   </array_start>
-    <cmd>logger "VueTorrent Updater: Array started."</cmd>
-  </array_start>
 
-<webui>/plugins/vuetorrent-updater/template/settings.php</webui>
+  <webui>/plugins/vuetorrent-updater/template/settings.php</webui>
 
-<page>
-  <name>vuetorrent-updater</name>
-  <title>VueTorrent Updater</title>
-  <url>/plugins/vuetorrent-updater/template/settings.php</url>
-  <menu>yes</menu>
-  <tab>settings</tab>
-</page>
+  <page>
+    <name>vuetorrent-updater</name>
+    <title>VueTorrent Updater</title>
+    <url>/plugins/vuetorrent-updater/template/settings.php</url>
+    <menu>yes</menu>
+    <tab>settings</tab>
+  </page>
 
-<help>
-  <name>vuetorrent-updater</name>
-  <url>https://github.com/jjermany/unraid-vuetorrent-updater-plugin</url>
-</help>
-
+  <help>
+    <name>vuetorrent-updater</name>
+    <url>https://github.com/jjermany/unraid-vuetorrent-updater-plugin</url>
+  </help>
 </plugin>
