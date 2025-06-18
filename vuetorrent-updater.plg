@@ -21,7 +21,6 @@
     <path>/usr/local/emhttp/plugins/vuetorrent-updater</path>
   </paths>
 
-  <copy src="/mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/vuetorrent-updater.plg"            dst="/usr/local/emhttp/plugins/vuetorrent-updater/vuetorrent-updater.plg"         mode="0755"/>
   <copy src="/mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/template/settings.php"          dst="/usr/local/emhttp/plugins/vuetorrent-updater/template/settings.php"        mode="0644"/>
   <copy src="/mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/scripts/update_vuetorrent.sh" dst="/usr/local/emhttp/plugins/vuetorrent-updater/scripts/update_vuetorrent.sh" mode="0755"/>
 
@@ -30,18 +29,25 @@
   </install>
 
   <remove>
-    <cmd>logger "VueTorrent Updater: Plugin uninstalled."</cmd>
+    <cmd>logger "VueTorrent Updater: Plugin uninstalled. User data in /usr/local/emhttp/plugins/vuetorrent-updater will be backed up to /boot/config/plugins/vuetorrent-updater-backup."</cmd>
+    <cmd>mkdir -p /boot/config/plugins/vuetorrent-updater-backup</cmd>
+    <cmd>cp -r /usr/local/emhttp/plugins/vuetorrent-updater/* /boot/config/plugins/vuetorrent-updater-backup/ 2>/dev/null || true</cmd>
     <cmd>rm -rf /usr/local/emhttp/plugins/vuetorrent-updater</cmd>
-  </remove>
-
+  <!--
+    The <array_start> event is triggered when the Unraid array is started.
+    Use this section to define commands or actions that should occur at array start.
+  -->
   <array_start>
     <cmd>logger "VueTorrent Updater: Array started."</cmd>
   </array_start>
+    <cmd>logger "VueTorrent Updater: Array started."</cmd>
+  </array_start>
 
-<page>
-  <name>vuetorrent</name>
-  <title>VueTorrent Updater</title>
-  <url>/plugins/vuetorrent-updater/template/settings.php</url>
-  <menu>yes</menu>
-</page>
+    <page>
+      <name>vuetorrent-updater</name>
+      <title>VueTorrent Updater</title>
+      <url>/Settings/vuetorrent-updater</url>
+      <menu>yes</menu>
+      <tab>settings</tab>
+    </page>
 </plugin>
