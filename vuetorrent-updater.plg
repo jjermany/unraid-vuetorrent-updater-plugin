@@ -38,11 +38,10 @@
     <cmd>logger "VueTorrent Updater: Array started."</cmd>
   </array_start>
 
-  <page>
-    <name>vuetorrent-updater</name>
-    <title>VueTorrent Updater</title>
-    <url>/plugins/vuetorrent-updater/template/settings.php</url>
-    <menu>yes</menu>
-    <tab>settings</tab>
-  </page>
+<page>
+  <name>vuetorrent</name>
+  <title>VueTorrent Updater</title>
+  <url>/plugins/vuetorrent-updater/template/settings.php</url>
+  <menu>yes</menu>
+</page>
 </plugin>
