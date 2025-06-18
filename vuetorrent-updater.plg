@@ -43,11 +43,15 @@
     <cmd>logger "VueTorrent Updater: Array started."</cmd>
   </array_start>
 
-    <page>
-      <name>vuetorrent-updater</name>
-      <title>VueTorrent Updater</title>
-      <url>/Settings/vuetorrent-updater</url>
-      <menu>yes</menu>
-      <tab>settings</tab>
-    </page>
+  <webui>
+    <url>http://[IP]:[PORT:8080]/Settings/vuetorrent-updater</url>
+  </webui>
+
+  <page>
+    <name>vuetorrent-updater</name>
+    <title>VueTorrent Updater</title>
+    <url>/Settings/vuetorrent-updater</url>
+    <menu>yes</menu>
+    <tab>settings</tab>
+  </page>
 </plugin>
