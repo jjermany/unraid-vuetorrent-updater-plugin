@@ -20,18 +20,6 @@
     <path>/usr/local/emhttp/plugins/vuetorrent-updater</path>
   </paths>
 
-  <copy src="/mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/vuetorrent-updater.plg"
-        dst="/usr/local/emhttp/plugins/vuetorrent-updater/vuetorrent-updater.plg"
-        mode="0755" />
-
-  <copy src="/mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/template/settings.php"
-        dst="/usr/local/emhttp/plugins/vuetorrent-updater/template/settings.php"
-        mode="0644" />
-
-  <copy src="/mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/scripts/update_vuetorrent.sh"
-        dst="/usr/local/emhttp/plugins/vuetorrent-updater/scripts/update_vuetorrent.sh"
-        mode="0755" />
-
 <install>
   <cmd>mkdir -p /usr/local/emhttp/plugins/vuetorrent-updater/template</cmd>
   <cmd>mkdir -p /usr/local/emhttp/plugins/vuetorrent-updater/scripts</cmd>
