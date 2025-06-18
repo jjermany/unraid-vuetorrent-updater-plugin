@@ -1,64 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<plugin name="VueTorrent Updater" author="Jalon Jermany" version="2025.06.18.2">
-  <description>Automates updating the VueTorrent WebUI for qBittorrent on Unraid.</description>
-  <category>Docker</category>
-  <language>en</language>
+<PLUGIN Name="VueTorrent Updater" Author="Jalon Jermany" Version="2025.06.19.1" PluginURL="https://raw.githubusercontent.com/jjermany/unraid-vuetorrent-updater-plugin/main/vuetorrent-updater.plg">
+  <Description>Automates updating the VueTorrent WebUI for qBittorrent on Unraid.</Description>
+  <Category>Docker</Category>
+  <Language>en</Language>
 
-  <changes>
+  <Changes>
     <h3>2025.06.18</h3>
     <ul>
       <li>Initial plugin framework with core update script.</li>
     </ul>
-  </changes>
+    <h3>2025.06.18.3</h3>
+    <ul>
+      <li>Converted to Unraid 7.1.3 compatible PLUGIN/FILE format.</li>
+    </ul>
+    <h3>2025.06.19.1</h3>
+    <ul>
+      <li>Finalized conversion to PLUGIN/FILE format and rootfs structure for Unraid 7.1.3.</li>
+    </ul>
+  </Changes>
 
-  <urls>
-    <support>https://github.com/jjermany/unraid-vuetorrent-updater-plugin/issues</support>
-    <repo>https://github.com/jjermany/unraid-vuetorrent-updater-plugin</repo>
-  </urls>
+  <FILE Name="rootfs" From="/boot/config/plugins/vuetorrent-updater/rootfs" To="/usr/local/emhttp/plugins/vuetorrent-updater" />
 
-  <paths>
-    <path>/usr/local/emhttp/plugins/vuetorrent-updater</path>
-  </paths>
+  <Install>
+    <Cmd>logger "VueTorrent Updater: Plugin (final format) installed successfully."</Cmd>
+    <Cmd>ls -lR /usr/local/emhttp/plugins/vuetorrent-updater/ >> /boot/config/plugins/plugin_debug.log</Cmd>
+  </Install>
 
-<install>
-  <cmd>mkdir -p /usr/local/emhttp/plugins/vuetorrent-updater/template</cmd>
-  <cmd>mkdir -p /usr/local/emhttp/plugins/vuetorrent-updater/scripts</cmd>
-  <cmd>logger "VueTorrent Updater: Starting plugin installation."</cmd>
-  <cmd>cp /mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/vuetorrent-updater.plg /usr/local/emhttp/plugins/vuetorrent-updater/ 2>>/boot/config/plugins/plugin_debug.log</cmd>
-  <cmd>cp /mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/template/settings.php /usr/local/emhttp/plugins/vuetorrent-updater/template/ 2>>/boot/config/plugins/plugin_debug.log</cmd>
-  <cmd>cp /mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/scripts/update_vuetorrent.sh /usr/local/emhttp/plugins/vuetorrent-updater/scripts/ 2>>/boot/config/plugins/plugin_debug.log</cmd>
-  <cmd>chmod 0755 /usr/local/emhttp/plugins/vuetorrent-updater/vuetorrent-updater.plg 2>>/boot/config/plugins/plugin_debug.log</cmd>
-  <cmd>chmod 0644 /usr/local/emhttp/plugins/vuetorrent-updater/template/settings.php 2>>/boot/config/plugins/plugin_debug.log</cmd>
-  <cmd>chmod 0755 /usr/local/emhttp/plugins/vuetorrent-updater/scripts/update_vuetorrent.sh 2>>/boot/config/plugins/plugin_debug.log</cmd>
-  <cmd>ls -l /usr/local/emhttp/plugins/vuetorrent-updater/ >> /boot/config/plugins/plugin_debug.log</cmd>
-  <cmd>ls -l /usr/local/emhttp/plugins/vuetorrent-updater/template/ >> /boot/config/plugins/plugin_debug.log</cmd>
-  <cmd>ls -l /usr/local/emhttp/plugins/vuetorrent-updater/scripts/ >> /boot/config/plugins/plugin_debug.log</cmd>
-  <cmd>logger "VueTorrent Updater: Plugin installed successfully."</cmd>
-</install>
+  <Remove>
+    <Cmd>logger "VueTorrent Updater: Plugin uninstalled. Backing up user data."</Cmd>
+    <Cmd>mkdir -p /boot/config/plugins/vuetorrent-updater-backup</Cmd>
+    <Cmd>cp -r /usr/local/emhttp/plugins/vuetorrent-updater/* /boot/config/plugins/vuetorrent-updater-backup/ 2>/dev/null || true</Cmd>
+    <Cmd>rm -rf /usr/local/emhttp/plugins/vuetorrent-updater</Cmd>
+  </Remove>
 
-  <remove>
-    <cmd>logger "VueTorrent Updater: Plugin uninstalled. Backing up user data."</cmd>
-    <cmd>mkdir -p /boot/config/plugins/vuetorrent-updater-backup</cmd>
-    <cmd>cp -r /usr/local/emhttp/plugins/vuetorrent-updater/* /boot/config/plugins/vuetorrent-updater-backup/ 2>/dev/null || true</cmd>
-    <cmd>rm -rf /usr/local/emhttp/plugins/vuetorrent-updater</cmd>
-  </remove>
+  <Array_Start>
+    <Cmd>logger "VueTorrent Updater: Array started."</Cmd>
+  </Array_Start>
 
-  <array_start>
-    <cmd>logger "VueTorrent Updater: Array started."</cmd>
-  </array_start>
+  <WebUI>/plugins/vuetorrent-updater/template/settings.php</WebUI>
 
-  <webui>/plugins/vuetorrent-updater/template/settings.php</webui>
+  <Page>
+    <Name>vuetorrent-updater</Name>
+    <Title>VueTorrent Updater</Title>
+    <URL>/plugins/vuetorrent-updater/template/settings.php</URL>
+    <Menu>yes</Menu>
+    <Tab>settings</Tab>
+  </Page>
 
-  <page>
-    <name>vuetorrent-updater</name>
-    <title>VueTorrent Updater</title>
-    <url>/plugins/vuetorrent-updater/template/settings.php</url>
-    <menu>yes</menu>
-    <tab>settings</tab>
-  </page>
-
-  <help>
-    <name>vuetorrent-updater</name>
-    <url>https://github.com/jjermany/unraid-vuetorrent-updater-plugin</url>
-  </help>
-</plugin>
+  <Help>
+    <Name>vuetorrent-updater</Name>
+    <URL>https://github.com/jjermany/unraid-vuetorrent-updater-plugin</URL>
+  </Help>
+</PLUGIN>
