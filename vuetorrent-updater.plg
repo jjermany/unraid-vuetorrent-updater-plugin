@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<plugin name="VueTorrent Updater" author="Jalon Jermany" version="2025.06.18.4">
+<plugin name="VueTorrent Updater" author="Jalon Jermany" version="2025.06.18.5">
   <description>Automates updating the VueTorrent WebUI for qBittorrent on Unraid.</description>
   <category>Docker</category>
   <language>en</language>
@@ -15,7 +15,7 @@
   </file>
 
   <install>
-    <cmd>logger "VueTorrent Updater installed"</cmd>
+    <cmd>logger "VueTorrent Updater: Installed successfully"</cmd>
   </install>
 
   <remove>
