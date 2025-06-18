@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<plugin name="VueTorrent Updater" author="Jalon Jermany" version="2025.06.18.1">
+<plugin name="VueTorrent Updater" author="Jalon Jermany" version="2025.06.18.2">
   <description>Automates updating the VueTorrent WebUI for qBittorrent on Unraid.</description>
   <category>Docker</category>
   <language>en</language>
@@ -20,19 +20,20 @@
     <path>/usr/local/emhttp/plugins/vuetorrent-updater</path>
   </paths>
 
-  <!-- Copy the settings page -->
+  <copy src="/mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/vuetorrent-updater.plg"
+        dst="/usr/local/emhttp/plugins/vuetorrent-updater/vuetorrent-updater.plg"
+        mode="0755" />
+
   <copy src="/mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/template/settings.php"
         dst="/usr/local/emhttp/plugins/vuetorrent-updater/template/settings.php"
         mode="0644" />
 
-  <!-- Copy the update script -->
   <copy src="/mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/scripts/update_vuetorrent.sh"
         dst="/usr/local/emhttp/plugins/vuetorrent-updater/scripts/update_vuetorrent.sh"
         mode="0755" />
 
   <install>
     <cmd>logger "VueTorrent Updater: Plugin installed successfully."</cmd>
-    <!-- Debugging: confirm source file was available -->
     <cmd>ls -l /mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/template/ >> /boot/plugin_debug.log</cmd>
   </install>
 
