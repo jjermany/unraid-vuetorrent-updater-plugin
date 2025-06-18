@@ -14,14 +14,13 @@
           mode="0644" />
   </file>
 
-<install>
-  <cmd>logger "VueTorrent Updater: Installed successfully"</cmd>
-  <cmd>echo "DEBUG: Checking for source file..." >> /boot/plugin_debug.log</cmd>
-  <cmd>ls -l /mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/template/settings.php >> /boot/plugin_debug.log 2>&1</cmd>
-  <cmd>echo "DEBUG: Listing copied file..." >> /boot/plugin_debug.log</cmd>
-  <cmd>ls -l /usr/local/emhttp/plugins/vuetorrent-updater/template/settings.php >> /boot/plugin_debug.log 2>&1</cmd>
-</install>
-
+  <install>
+    <cmd>logger "VueTorrent Updater: Installed successfully"</cmd>
+    <cmd>echo "DEBUG: Checking for source file..." >> /boot/plugin_debug.log</cmd>
+    <cmd>ls -l /mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/template/settings.php >> /boot/plugin_debug.log 2>&1</cmd>
+    <cmd>echo "DEBUG: Listing copied file..." >> /boot/plugin_debug.log</cmd>
+    <cmd>ls -l /usr/local/emhttp/plugins/vuetorrent-updater/template/settings.php >> /boot/plugin_debug.log 2>&1</cmd>
+  </install>
 
   <remove>
     <cmd>rm -rf /usr/local/emhttp/plugins/vuetorrent-updater</cmd>
