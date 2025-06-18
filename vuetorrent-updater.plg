@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<plugin name="VueTorrent Updater" author="Jalon Jermany" version="2025.06.18.6">
+<plugin name="VueTorrent Updater" author="Jalon Jermany" version="2025.06.18.7">
   <description>Automates updating the VueTorrent WebUI for qBittorrent on Unraid.</description>
   <category>Docker</category>
   <language>en</language>
@@ -14,9 +14,14 @@
           mode="0644" />
   </file>
 
-  <install>
-    <cmd>logger "VueTorrent Updater: Installed successfully"</cmd>
-  </install>
+<install>
+  <cmd>logger "VueTorrent Updater: Installed successfully"</cmd>
+  <cmd>echo "DEBUG: Checking for source file..." >> /boot/plugin_debug.log</cmd>
+  <cmd>ls -l /mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/template/settings.php >> /boot/plugin_debug.log 2>&1</cmd>
+  <cmd>echo "DEBUG: Listing copied file..." >> /boot/plugin_debug.log</cmd>
+  <cmd>ls -l /usr/local/emhttp/plugins/vuetorrent-updater/template/settings.php >> /boot/plugin_debug.log 2>&1</cmd>
+</install>
+
 
   <remove>
     <cmd>rm -rf /usr/local/emhttp/plugins/vuetorrent-updater</cmd>
