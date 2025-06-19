@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<plugin name="vuetorrent-updater" author="Jalon Jermany" version="2025.06.18.13">
+<plugin name="vuetorrent-updater" author="Jalon Jermany" version="2025.06.18.14">
   <description>Automates updating the VueTorrent WebUI for qBittorrent on Unraid.</description>
   <category>Docker</category>
   <language>en</language>
@@ -9,7 +9,7 @@
   </paths>
 
   <file method="install">
-    <copy src="/boot/config/plugins/vuetorrent-updater/template/settings.php"
+    <copy src="/mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/template/settings.php"
           dst="/usr/local/emhttp/plugins/vuetorrent-updater/template/settings.php"
           mode="0644" />
   </file>
