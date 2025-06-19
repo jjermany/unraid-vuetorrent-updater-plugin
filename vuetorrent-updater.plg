@@ -8,15 +8,14 @@
     <path>/usr/local/emhttp/plugins/vuetorrent-updater</path>
   </paths>
 
-<file method="install">
-  <copy src="/mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/template/settings.php"
-        dst="/usr/local/emhttp/plugins/vuetorrent-updater/template/settings.php"
-        mode="0644" />
-</file>
+  <file method="install">
+    <copy src="/boot/config/plugins/vuetorrent-updater/template/settings.php"
+          dst="/usr/local/emhttp/plugins/vuetorrent-updater/template/settings.php"
+          mode="0644" />
+  </file>
 
   <install>
     <cmd>mkdir -p /usr/local/emhttp/plugins/vuetorrent-updater/template</cmd>
-    <cmd>cp /mnt/user/plugins-dev/unraid-vuetorrent-updater-plugin/template/settings.php /usr/local/emhttp/plugins/vuetorrent-updater/template/settings.php</cmd>
     <cmd>logger "VueTorrent Updater installed successfully."</cmd>
   </install>
 
