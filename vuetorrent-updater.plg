@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<plugin name="vuetorrent-updater" author="Jalon Jermany" version="2025.06.18.12">
+<plugin name="vuetorrent-updater" author="Jalon Jermany" version="2025.06.18.13">
   <description>Automates updating the VueTorrent WebUI for qBittorrent on Unraid.</description>
   <category>Docker</category>
   <language>en</language>
@@ -31,6 +31,6 @@
     <title>VueTorrent Updater</title>
     <url>/plugins/vuetorrent-updater/template/settings.php</url>
     <menu>yes</menu>
-    <tab>settings</tab>
+    <tab>Settings</tab>
   </page>
 </plugin>
