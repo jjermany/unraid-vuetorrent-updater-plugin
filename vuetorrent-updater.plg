@@ -8,7 +8,7 @@
     <path>/usr/local/emhttp/plugins/vuetorrent-updater</path>
   </paths>
 
-  <file method="install">
+  <file>
     <copy src="/boot/config/plugins/vuetorrent-updater/template/settings.php"
           dst="/usr/local/emhttp/plugins/vuetorrent-updater/template/settings.php"
           mode="0644" />
